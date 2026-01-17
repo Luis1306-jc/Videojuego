@@ -1,0 +1,195 @@
+[gd_scene load_steps=20 format=3 uid="uid://cwg47wl0tnrfa"]
+
+[ext_resource type="Texture2D" uid="uid://d2jcguy02q4t" path="res://Cat_player/Cat_sheets/Cat_attack_1.png" id="1_fhfp6"]
+[ext_resource type="Texture2D" uid="uid://ckuc06vojxwi0" path="res://Cat_player/Cat_sheets/Cat_idle_1.png" id="2_piqjp"]
+[ext_resource type="Texture2D" uid="uid://d3vjfcq8gjhdt" path="res://Cat_player/Cat_sheets/Cat_jump_2.png" id="3_txan2"]
+[ext_resource type="Texture2D" uid="uid://ceqrjmp2va2xe" path="res://Cat_player/Cat_sheets/Cat_run_1.png" id="4_5afef"]
+
+[sub_resource type="GDScript" id="GDScript_fhfp6"]
+script/source = "extends CharacterBody2D
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+@onready var sprite = $AnimatedSprite2D
+
+var atacando = false
+
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# CORRECCIÓN DEL ERROR: 
+	# En Godot 4, para detectar una tecla física directamente una sola vez:
+	if Input.is_physical_key_pressed(KEY_1) and not atacando:
+		atacar()
+
+	# Manejar Salto
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor() and not atacando:
+		velocity.y = JUMP_VELOCITY
+
+	# Dirección y Movimiento
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	
+	if not atacando:
+		if direction > 0:
+			sprite.scale.x = 1
+		elif direction < 0:
+			sprite.scale.x = -1
+
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+	else:
+		# Frenado total para que la animación de ataque se vea clara
+		velocity.x = 0
+
+	move_and_slide()
+	update_animations(direction)
+
+func atacar():
+	atacando = true
+	sprite.play(\"Ataque\")
+
+func update_animations(direction):
+	if atacando:
+		return
+
+	if not is_on_floor():
+		sprite.play(\"Jump\")
+	elif direction != 0:
+		sprite.play(\"Run\")
+	else:
+		sprite.play(\"Idle\")
+
+# Esta función DEBE estar conectada desde el panel de Nodos
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == \"Ataque\":
+		atacando = false
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6dgo"]
+radius = 19.0
+height = 38.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tweqe"]
+atlas = ExtResource("1_fhfp6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgsu6"]
+atlas = ExtResource("1_fhfp6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwdqh"]
+atlas = ExtResource("1_fhfp6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wshx"]
+atlas = ExtResource("1_fhfp6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ue8r"]
+atlas = ExtResource("2_piqjp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_861dn"]
+atlas = ExtResource("2_piqjp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xct1w"]
+atlas = ExtResource("2_piqjp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r02ff"]
+atlas = ExtResource("3_txan2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br8hn"]
+atlas = ExtResource("4_5afef")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5elg"]
+atlas = ExtResource("4_5afef")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmgm8"]
+atlas = ExtResource("4_5afef")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gw2y"]
+atlas = ExtResource("4_5afef")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8tuh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tweqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgsu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwdqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wshx")
+}],
+"loop": true,
+"name": &"Ataque",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ue8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_861dn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xct1w")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r02ff")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br8hn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5elg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmgm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gw2y")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 14.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = SubResource("GDScript_fhfp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_i6dgo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_r8tuh")
+animation = &"Ataque"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
