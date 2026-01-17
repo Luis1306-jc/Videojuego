@@ -469,13 +469,16 @@ layer_0/tile_data = PackedInt32Array(589831, 0, 0, 655367, 0, 1, 720903, 0, 2, 5
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 
 [node name="FondoPrincipal" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
 position = Vector2(-767, -40)
 texture = ExtResource("3_rksvm")
 
 [node name="FondoPrincipal2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
 position = Vector2(228, -39)
 texture = ExtResource("3_rksvm")
 
 [node name="FondoPrincipal3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
 position = Vector2(1228, -34)
 texture = ExtResource("3_rksvm")
