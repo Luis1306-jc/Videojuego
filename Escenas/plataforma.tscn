@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqcmt4pne7lqj"]
+
+[ext_resource type="Texture2D" uid="uid://dxkswdtw04idj" path="res://icon.svg" id="1_hgmvb"]
+
+[sub_resource type="Curve2D" id="Curve2D_1qdvp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 356, 209, 0, 0, 0, 0, 447, 209)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4sdn"]
+size = Vector2(38.01268, 11.0429535)
+
+[sub_resource type="Animation" id="Animation_cteqh"]
+resource_name = "move"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8784]
+}
+
+[sub_resource type="Animation" id="Animation_7x6ct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fukgq"]
+_data = {
+&"RESET": SubResource("Animation_7x6ct"),
+&"move": SubResource("Animation_cteqh")
+}
+
+[node name="plataforma" type="Path2D"]
+curve = SubResource("Curve2D_1qdvp")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(356, 209)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D"]
+position = Vector2(231, 211)
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/CharacterBody2D"]
+position = Vector2(-230.00026, -210.97778)
+scale = Vector2(0.29958487, 0.1)
+texture = ExtResource("1_hgmvb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D"]
+position = Vector2(-230.01086, -210.47852)
+shape = SubResource("RectangleShape2D_i4sdn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fukgq")
+}
+autoplay = "move"

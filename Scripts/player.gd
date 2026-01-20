@@ -9,7 +9,6 @@ var cont_jump : int = 0
 var max_jump : int = 2
 
 func _ready():
-	hit()
 	$Area2D/CollisionShape2D.disabled = true
 	$anim.animation_finished.connect(_on_anim_finished)
 
@@ -66,11 +65,26 @@ func animaciones():
 func hit():
 	hitplayer = true
 	velocity = Vector2.ZERO
-	velocity = Vector2(-100,-200)
+	
+	if !$anim.flip_h:
+		velocity = Vector2(-100,-200)
+	else:
+		velocity = Vector2(100,-200)
+		
+	
+	
 	$anim.play("hit")
 	await $anim.animation_finished
 	velocity = Vector2.ZERO
 	hitplayer = false
+	
+	get_tree().get_nodes_in_group("barraplayer")[0].DisminuirVida(30)
+	
+func dead():
+	set_physics_process(false)
+	$anim.play("dead")
+	await $anim.animation_finished
+	queue_free()
 
 func _on_anim_finished():
 	atacar = false
