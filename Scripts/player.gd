@@ -78,7 +78,7 @@ func hit():
 	velocity = Vector2.ZERO
 	hitplayer = false
 	
-	get_tree().get_nodes_in_group("barraplayer")[0].DisminuirVida(30)
+	get_tree().get_nodes_in_group("barraplayer2")[0].DisminuirVida(30)
 	
 func dead():
 	set_physics_process(false)
