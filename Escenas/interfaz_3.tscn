@@ -341,6 +341,6 @@ layer_0/tile_data = PackedInt32Array(-65539, 3, 4, -3, 3, 5, 65533, 3, 6, -65538
 position = Vector2(1, 0)
 
 [node name="Bg" type="Sprite2D" parent="ParallaxBackground"]
-position = Vector2(292, -24)
+position = Vector2(257, -5.0000005)
 scale = Vector2(1, 1.7666664)
 texture = ExtResource("4_qgbpw")
