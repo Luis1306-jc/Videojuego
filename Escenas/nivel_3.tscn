@@ -1,0 +1,201 @@
+[gd_scene load_steps=17 format=3 uid="uid://b846ytoc7vpg5"]
+
+[ext_resource type="Texture2D" uid="uid://2q0gbmj4cx2x" path="res://Cat_sheets/Cat_fall_1.png" id="1_clw8a"]
+[ext_resource type="Texture2D" uid="uid://ckuc06vojxwi0" path="res://Cat_sheets/Cat_idle_1.png" id="2_l2spy"]
+[ext_resource type="Texture2D" uid="uid://d3vjfcq8gjhdt" path="res://Cat_sheets/Cat_jump_2.png" id="3_2ruti"]
+[ext_resource type="Texture2D" uid="uid://ceqrjmp2va2xe" path="res://Cat_sheets/Cat_run_1.png" id="4_jjqy5"]
+
+[sub_resource type="GDScript" id="GDScript_clw8a"]
+script/source = "extends CharacterBody2D
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -520.0   # 🔼 salto más alto
+
+# Ajustes finos de gravedad
+const FALL_MULTIPLIER = 1.8    # 🔽 más peso al caer
+const LOW_JUMP_MULTIPLIER = 2.2 # salto corto si sueltas rápido
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
+
+func _physics_process(delta: float) -> void:
+	apply_gravity(delta)
+	handle_jump()
+	handle_movement()
+	handle_states()
+	move_and_slide()
+
+
+# ------------------
+# FÍSICA MEJORADA
+# ------------------
+func apply_gravity(delta):
+	if not is_on_floor():
+		var gravity = get_gravity()
+		
+		# Cayendo
+		if velocity.y > 0:
+			velocity += gravity * FALL_MULTIPLIER * delta
+		# Subiendo pero soltó el botón (salto corto)
+		elif velocity.y < 0 and not Input.is_action_pressed(\"ui_accept\"):
+			velocity += gravity * LOW_JUMP_MULTIPLIER * delta
+		else:
+			velocity += gravity * delta
+
+
+func handle_jump():
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+
+func handle_movement():
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	
+	if direction:
+		velocity.x = direction * SPEED
+		anim.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+
+# ------------------
+# ESTADOS / ANIMACIONES
+# ------------------
+func handle_states():
+	if is_on_floor():
+		if abs(velocity.x) < 5:
+			idle()
+		else:
+			run()
+	else:
+		if velocity.y < 0:
+			jump()
+		else:
+			fall()
+
+
+func idle():
+	if anim.animation != \"Idle\":
+		anim.play(\"Idle\")
+
+
+func run():
+	if anim.animation != \"Run\":
+		anim.play(\"Run\")
+
+
+func jump():
+	if anim.animation != \"Jump\":
+		anim.play(\"Jump\")
+
+
+func fall():
+	if anim.animation != \"Fall\":
+		anim.play(\"Fall\")
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gj77e"]
+radius = 26.627054
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mvdn"]
+atlas = ExtResource("1_clw8a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia6el"]
+atlas = ExtResource("2_l2spy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn02w"]
+atlas = ExtResource("2_l2spy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bygme"]
+atlas = ExtResource("2_l2spy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp2kh"]
+atlas = ExtResource("3_2ruti")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jdqd"]
+atlas = ExtResource("4_jjqy5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb6w6"]
+atlas = ExtResource("4_jjqy5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlb0g"]
+atlas = ExtResource("4_jjqy5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acpao"]
+atlas = ExtResource("4_jjqy5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pnrke"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mvdn")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia6el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn02w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bygme")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp2kh")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jdqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb6w6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlb0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acpao")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[node name="nivel 3" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = SubResource("GDScript_clw8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-13, -3)
+shape = SubResource("CircleShape2D_gj77e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-10, -5)
+sprite_frames = SubResource("SpriteFrames_pnrke")
+animation = &"Run"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(29, -193)
