@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cpibanlehd67j"]
+[gd_scene load_steps=37 format=3 uid="uid://cpibanlehd67j"]
 
 [ext_resource type="Script" uid="uid://dqdeh8vhcucul" path="res://Scripts/player.gd" id="1_b21vg"]
 [ext_resource type="Texture2D" uid="uid://d2jcguy02q4t" path="res://Cat_sheets/Cat_attack_1.png" id="2_ohiiw"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://ckuc06vojxwi0" path="res://Cat_sheets/Cat_idle_1.png" id="6_y717v"]
 [ext_resource type="Texture2D" uid="uid://d3vjfcq8gjhdt" path="res://Cat_sheets/Cat_jump_2.png" id="7_vwnoe"]
 [ext_resource type="Texture2D" uid="uid://ceqrjmp2va2xe" path="res://Cat_sheets/Cat_run_1.png" id="8_r84g6"]
+[ext_resource type="Texture2D" uid="uid://x1l4vldf0vir" path="res://tilemap/Tiles/tile_0046.png" id="9_ul4kv"]
+[ext_resource type="Texture2D" uid="uid://d2rov4mci7tcs" path="res://tilemap/Tiles/tile_0044.png" id="10_oba5i"]
+[ext_resource type="Script" uid="uid://vrr26aoi0ieg" path="res://Scripts/barravidaperso.gd" id="11_y717v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aaebe"]
 atlas = ExtResource("2_ohiiw")
@@ -207,23 +210,47 @@ size = Vector2(20.5, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btnvu"]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(118, 206)
 script = ExtResource("1_b21vg")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
-position = Vector2(99, 210.00002)
+position = Vector2(0.5, -0.99998474)
 scale = Vector2(0.84375, 0.8125)
 sprite_frames = SubResource("SpriteFrames_aaebe")
 animation = &"dead"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(100.25, 212)
+position = Vector2(1.75, 1)
 shape = SubResource("RectangleShape2D_1qdvp")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(19, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(99, 211)
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_btnvu")
+
+[node name="BarravidaPlayer" type="TextureProgressBar" parent="." groups=["barraplayer2", "player"]]
+offset_left = -8.5
+offset_top = -26.0
+offset_right = 9.5
+offset_bottom = -8.0
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("9_ul4kv")
+texture_progress = ExtResource("10_oba5i")
+script = ExtResource("11_y717v")
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
+zoom = Vector2(5, 5)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.04
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.01
+editor_draw_drag_margin = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

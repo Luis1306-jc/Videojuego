@@ -7,6 +7,7 @@ var atacar := false
 var hitplayer=false
 var cont_jump : int = 0
 var max_jump : int = 2
+@onready var vida_bar := $BarravidaPlayer
 
 func _ready():
 	$Area2D/CollisionShape2D.disabled = true
@@ -47,6 +48,7 @@ func _physics_process(delta):
 		animaciones()
 	move_and_slide()
 
+
 func animaciones():
 	if atacar:
 		return
@@ -70,21 +72,24 @@ func hit():
 		velocity = Vector2(-100,-200)
 	else:
 		velocity = Vector2(100,-200)
-		
-	
 	
 	$anim.play("hit")
 	await $anim.animation_finished
-	velocity = Vector2.ZERO
+	
 	hitplayer = false
-	
-	get_tree().get_nodes_in_group("barraplayer2")[0].DisminuirVida(30)
-	
+
+	if vida_bar.disminuir_vida(30):
+		dead()
+
 func dead():
 	set_physics_process(false)
 	$anim.play("dead")
 	await $anim.animation_finished
-	queue_free()
+	Global.moneda = 0
+	Global.llave = false
+	get_tree().change_scene_to_file("res://Escenas/game_over.tscn")
+
+
 
 func _on_anim_finished():
 	atacar = false
@@ -93,4 +98,4 @@ func _on_anim_finished():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("enemie"):
-		body.dead()
+		hit()  # Llama a tu propio método hit() del jugador
