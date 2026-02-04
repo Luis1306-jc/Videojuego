@@ -1,12 +1,8 @@
 extends TextureProgressBar
 
+func disminuir_vida(cantidad: int) -> bool:
+	value = max(value - cantidad, 0)
+	return value == 0
 
-var maxvalor : int
-func _ready() -> void:
-	maxvalor = 100
-
-
-func DisminuirVida(damage):
-	value -= damage
-	if value <= 0:
-		get_tree().get_nodes_in_group("player")[0].dead()
+func aumentar_vida(cantidad: int):
+	value = min(value + cantidad, max_value)
