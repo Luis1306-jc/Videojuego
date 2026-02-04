@@ -105,23 +105,7 @@ func _on_body_entered(body: Node2D) -> void:
 		print(\"¡Auch! Reiniciando nivel...\")
 		get_tree().reload_current_scene()
 		# Añade esto al final de tu script de jugador
-func morir_gato():
-	# 1. Detenemos al gato para que no se mueva mientras muere
-	set_physics_process(false)
-	
-	# 2. Intentamos reproducir la animación
-	if $AnimatedSprite2D.sprite_frames.has_animation(\"Dead\"):
-		$AnimatedSprite2D.play(\"Dead\")
-		print(\"Gatito muriendo...\")
-	
-	# 3. ESPERA DE SEGURIDAD: 
-	# No importa si la animación tiene loop o no, 
-	# el juego se reiniciará sí o sí tras 1.5 segundos.
-	await get_tree().create_timer(1.5).timeout
-	
-	# 4. REINICIAR
-	print(\"Reiniciando nivel...\")
-	get_tree().reload_current_scene()
+
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gj77e"]
