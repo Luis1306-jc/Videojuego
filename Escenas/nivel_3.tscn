@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://b846ytoc7vpg5"]
+[gd_scene load_steps=23 format=3 uid="uid://b846ytoc7vpg5"]
 
 [ext_resource type="Texture2D" uid="uid://2q0gbmj4cx2x" path="res://Cat_sheets/Cat_fall_1.png" id="1_clw8a"]
+[ext_resource type="Texture2D" uid="uid://bp5c6ljv0wjtk" path="res://Cat_sheets/Cat_dead_1.png" id="1_l2spy"]
 [ext_resource type="Texture2D" uid="uid://ckuc06vojxwi0" path="res://Cat_sheets/Cat_idle_1.png" id="2_l2spy"]
 [ext_resource type="Texture2D" uid="uid://d3vjfcq8gjhdt" path="res://Cat_sheets/Cat_jump_2.png" id="3_2ruti"]
 [ext_resource type="Texture2D" uid="uid://ceqrjmp2va2xe" path="res://Cat_sheets/Cat_run_1.png" id="4_jjqy5"]
@@ -92,10 +93,41 @@ func jump():
 func fall():
 	if anim.animation != \"Fall\":
 		anim.play(\"Fall\")
+func dead():
+	if anim.animation != \"Dead\":
+		anim.play(\"Dead\")
+
+
+func _on_body_entered(body: Node2D) -> void:
+	# Verificamos si lo que entró es el jugador
+	# Usamos 'is CharacterBody2D' porque es el tipo de tu script original
+	if body is CharacterBody2D:
+		print(\"¡Auch! Reiniciando nivel...\")
+		get_tree().reload_current_scene()
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gj77e"]
-radius = 26.627054
+radius = 21.213203
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ruti"]
+atlas = ExtResource("1_l2spy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjqy5"]
+atlas = ExtResource("1_l2spy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj77e"]
+atlas = ExtResource("1_l2spy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnrke"]
+atlas = ExtResource("1_l2spy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl3c0"]
+atlas = ExtResource("1_l2spy")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mvdn"]
 atlas = ExtResource("1_clw8a")
@@ -135,6 +167,26 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pnrke"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ruti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjqy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj77e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnrke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl3c0")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4mvdn")
@@ -189,13 +241,14 @@ animations = [{
 script = SubResource("GDScript_clw8a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-13, -3)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_gj77e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-position = Vector2(-10, -5)
+position = Vector2(1, -1.0000002)
+scale = Vector2(1.2812501, 1.3750001)
 sprite_frames = SubResource("SpriteFrames_pnrke")
-animation = &"Run"
+animation = &"Dead"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(29, -193)
+position = Vector2(14, -59)
