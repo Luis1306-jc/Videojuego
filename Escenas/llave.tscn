@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhob7tg11u3sr"]
+
+[ext_resource type="Script" uid="uid://jvlbn3pbe400" path="res://Scripts/llave.gd" id="1_eo2i0"]
+[ext_resource type="Texture2D" uid="uid://6fa4cix83wwv" path="res://platformer/5 GUI/Icons/Icon_03.png" id="1_o7t4g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eo2i0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_o7t4g")
+}],
+"loop": true,
+"name": &"cofre",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eo2i0"]
+size = Vector2(10, 10)
+
+[node name="llave" type="Area2D"]
+script = ExtResource("1_eo2i0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eo2i0")
+animation = &"cofre"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eo2i0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
