@@ -105,23 +105,121 @@ func _on_body_entered(body: Node2D) -> void:
 		print(\"¡Auch! Reiniciando nivel...\")
 		get_tree().reload_current_scene()
 		# Añade esto al final de tu script de jugador
+extends CharacterBody2D
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -520.0   # 🔼 salto más alto
+
+# Ajustes finos de gravedad
+const FALL_MULTIPLIER = 1.8    # 🔽 más peso al caer
+const LOW_JUMP_MULTIPLIER = 2.2 # salto corto si sueltas rápido
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
+
+func _physics_process(delta: float) -> void:
+	apply_gravity(delta)
+	handle_jump()
+	handle_movement()
+	handle_states()
+	move_and_slide()
+
+
+# ------------------
+# FÍSICA MEJORADA
+# ------------------
+func apply_gravity(delta):
+	if not is_on_floor():
+		var gravity = get_gravity()
+		
+		# Cayendo
+		if velocity.y > 0:
+			velocity += gravity * FALL_MULTIPLIER * delta
+		# Subiendo pero soltó el botón (salto corto)
+		elif velocity.y < 0 and not Input.is_action_pressed(\"ui_accept\"):
+			velocity += gravity * LOW_JUMP_MULTIPLIER * delta
+		else:
+			velocity += gravity * delta
+
+
+func handle_jump():
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+
+func handle_movement():
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	
+	if direction:
+		velocity.x = direction * SPEED
+		anim.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+
+# ------------------
+# ESTADOS / ANIMACIONES
+# ------------------
+func handle_states():
+	if is_on_floor():
+		if abs(velocity.x) < 5:
+			idle()
+		else:
+			run()
+	else:
+		if velocity.y < 0:
+			jump()
+		else:
+			fall()
+
+
+func idle():
+	if anim.animation != \"Idle\":
+		anim.play(\"Idle\")
+
+
+func run():
+	if anim.animation != \"Run\":
+		anim.play(\"Run\")
+
+
+func jump():
+	if anim.animation != \"Jump\":
+		anim.play(\"Jump\")
+
+
+func fall():
+	if anim.animation != \"Fall\":
+		anim.play(\"Fall\")
+func dead():
+	if anim.animation != \"Dead\":
+		anim.play(\"Dead\")
+
+
+func _on_body_entered(body: Node2D) -> void:
+	# Verificamos si lo que entró es el jugador
+	# Usamos 'is CharacterBody2D' porque es el tipo de tu script original
+	if body is CharacterBody2D:
+		print(\"¡Auch! Reiniciando nivel...\")
+		get_tree().reload_current_scene()
+		# Añade esto al final de tu script de jugador
 func morir_gato():
-	# 1. Detenemos al gato para que no se mueva mientras muere
+	# 1. Bloqueamos el movimiento
 	set_physics_process(false)
 	
-	# 2. Intentamos reproducir la animación
+	# 2. Reproducir animación
 	if $AnimatedSprite2D.sprite_frames.has_animation(\"Dead\"):
 		$AnimatedSprite2D.play(\"Dead\")
-		print(\"Gatito muriendo...\")
+		# Esperamos a que termine la animación
+		await $AnimatedSprite2D.animation_finished
+	else:
+		# Si no hay animación, esperamos 1 segundo de seguridad
+		await get_tree().create_timer(1.0).timeout
 	
-	# 3. ESPERA DE SEGURIDAD: 
-	# No importa si la animación tiene loop o no, 
-	# el juego se reiniciará sí o sí tras 1.5 segundos.
-	await get_tree().create_timer(1.5).timeout
-	
-	# 4. REINICIAR
-	print(\"Reiniciando nivel...\")
+	# 3. TERMINAR / REINICIAR
+	# Esto hace que el juego reinicie la escena actual
 	get_tree().reload_current_scene()
+
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gj77e"]
