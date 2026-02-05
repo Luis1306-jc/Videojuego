@@ -6,4 +6,7 @@ func _on_reintentar_pressed():
 	get_tree().change_scene_to_file("res://Escenas/game.tscn")
 
 func _on_menu_pressed():
+	call_deferred("_ir_menu")
+
+func _ir_menu():
 	get_tree().change_scene_to_file("res://Escenas/Menu_Principal.tscn")

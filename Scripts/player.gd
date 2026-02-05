@@ -83,13 +83,17 @@ func hit():
 
 func dead():
 	set_physics_process(false)
+
+	var tree = get_tree()   # guardar referencia
+
 	$anim.play("dead")
 	await $anim.animation_finished
+
 	Global.moneda = 0
 	Global.llave = false
-	get_tree().change_scene_to_file("res://Escenas/game_over.tscn")
 
-
+	if tree:
+		tree.change_scene_to_file("res://Escenas/game_over.tscn")
 
 func _on_anim_finished():
 	atacar = false
