@@ -1,14 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://b2yjyaoxh10fc"]
+[gd_scene load_steps=17 format=3 uid="uid://b2yjyaoxh10fc"]
 
-[ext_resource type="PackedScene" uid="uid://b846ytoc7vpg5" path="res://Escenas/nivel_3.tscn" id="1_6xsjs"]
 [ext_resource type="Texture2D" uid="uid://c8bmd25nu7lsx" path="res://platformer/7 Levels/Tiled/GUI.png" id="2_db32h"]
 [ext_resource type="Texture2D" uid="uid://ci7l7t1dm8xw8" path="res://tilemap/SampleA.png" id="2_lxc5e"]
 [ext_resource type="Texture2D" uid="uid://dysxlvk6jnseu" path="res://platformer/7 Levels/Tiled/Tileset.png" id="3_qgbpw"]
 [ext_resource type="Texture2D" uid="uid://bowtcpvgdb2bg" path="res://tilemap/Preview.png" id="3_x7lwy"]
-[ext_resource type="Texture2D" uid="uid://bpgy4sm0ynswf" path="res://platformer/4 Enemies/2/Fall.png" id="6_dt8o0"]
-[ext_resource type="Texture2D" uid="uid://5yd6uw73qs7e" path="res://platformer/4 Enemies/2/Hit.png" id="7_tmfmn"]
-[ext_resource type="Texture2D" uid="uid://boptspnq5ag4" path="res://platformer/4 Enemies/2/Idle.png" id="8_sd5ju"]
-[ext_resource type="Texture2D" uid="uid://c7n0s2w4xpsa8" path="res://platformer/4 Enemies/2/Jump.png" id="9_1o7g7"]
+[ext_resource type="PackedScene" uid="uid://cpibanlehd67j" path="res://Escenas/player.tscn" id="6_7gqem"]
+[ext_resource type="PackedScene" uid="uid://8let18qpud3n" path="res://Escenas/enemigo_2.tscn" id="6_x7lwy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hm3uv"]
 size = Vector2(224, 51)
@@ -4468,256 +4465,8 @@ func _on_cabeza_detector_body_entered(body: Node2D) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxc5e"]
 size = Vector2(446, 20)
 
-[sub_resource type="GDScript" id="GDScript_dt8o0"]
-script/source = "extends CharacterBody2D
-
-const SPEED = 50.0
-const GRAVITY = 900.0
-
-var direction = 1
-var esta_muerto = false
-
-@onready var anim = $AnimatedSprite2D
-@onready var rayo = $RayCast2D
-
-func _physics_process(delta: float) -> void:
-	# 1. BLOQUEO DE MUERTE: Si está muerto, no hace nada de lo de abajo
-	if esta_muerto:
-		return
-
-	# Gravedad básica
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
-	
-	# Patrulla: Si choca pared o no hay suelo, da la vuelta
-	if is_on_wall() or not rayo.is_colliding():
-		direction *= -1
-		rayo.position.x = 15 * direction 
-	
-	velocity.x = direction * SPEED
-	
-	# --- CONTROL DE ANIMACIONES DE MOVIMIENTO ---
-	if velocity.x != 0:
-		anim.play(\"Run\")
-		anim.flip_h = direction < 0
-	else:
-		anim.play(\"Idle\")
-		
-	move_and_slide()
-
-# --- DETECCIÓN DE JUGADOR (Asegúrate de conectar estas señales) ---
-
-func _on_cabeza_detector_body_entered(body: Node2D) -> void:
-	# Prioridad: Solo si cae sobre la cabeza y no está ya muerto
-	if not esta_muerto and body.is_in_group(\"jugador\") and body.velocity.y > 0:
-		morir(body)
-
-func _on_cuerpo_dañino_body_entered(body: Node2D) -> void:
-	if not esta_muerto and body.is_in_group(\"jugador\"):
-		# Si el gato tiene la función, que muera con estilo
-		if body.has_method(\"morir_gato\"):
-			body.morir_gato()
-		else:
-			# Si el gato no tiene la función, reiniciamos de golpe para no trabarnos
-			get_tree().reload_current_scene()
-# --- FUNCIÓN DE MUERTE (REVISADA) ---
-
-func morir(jugador_node):
-	esta_muerto = true # Esto detiene el movimiento y otras animaciones arriba
-	
-	# Detenemos al enemigo en seco
-	velocity = Vector2.ZERO
-	
-	# Rebote del jugador
-	jugador_node.velocity.y = -400
-	
-	# REPRODUCIR ANIMACIÓN DE MUERTE
-	if anim.sprite_frames.has_animation(\"Hit\"):
-		anim.play(\"Hit\")
-		print(\"Reproduciendo Hit...\")
-	else:
-		print(\"ERROR: No existe la animación 'Hit' en el AnimatedSprite2D\")
-
-	# DESACTIVAR COLISIONES (Para que no estorbe mientras muere)
-	# Usamos set_deferred por seguridad en Godot
-	$CollisionShape2D.set_deferred(\"disabled\", true)
-	$CuerpoDañino/CollisionShape2D.set_deferred(\"disabled\", true)
-	$CabezaDetector/CollisionShape2D.set_deferred(\"disabled\", true)
-	
-	# ESPERAR A QUE TERMINE PARA DESAPARECER
-	await anim.animation_finished
-	queue_free()
-"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0u30h"]
-atlas = ExtResource("6_dt8o0")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_56oq1"]
-atlas = ExtResource("7_tmfmn")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uqdte"]
-atlas = ExtResource("7_tmfmn")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdjno"]
-atlas = ExtResource("7_tmfmn")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kax0x"]
-atlas = ExtResource("7_tmfmn")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h8fnt"]
-atlas = ExtResource("7_tmfmn")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vupa"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gyhw6"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_60gml"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1e6d"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_brj4s"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wvnvh"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(240, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wyry7"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(288, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f4cr0"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(336, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qxjni"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(384, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_empvr"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(432, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sovvi"]
-atlas = ExtResource("8_sd5ju")
-region = Rect2(480, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uesju"]
-atlas = ExtResource("9_1o7g7")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c3kwt"]
-atlas = ExtResource("9_1o7g7")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_pb0qv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0u30h")
-}],
-"loop": true,
-"name": &"Fall",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_56oq1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uqdte")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qdjno")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kax0x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h8fnt")
-}],
-"loop": true,
-"name": &"Hit",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0vupa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gyhw6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_60gml")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y1e6d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_brj4s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wvnvh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wyry7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f4cr0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qxjni")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_empvr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sovvi")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uesju")
-}],
-"loop": true,
-"name": &"Jump",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c3kwt")
-}],
-"loop": true,
-"name": &"Run",
-"speed": 10.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2xtum"]
-radius = 19.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dt8o0"]
-size = Vector2(39, 41)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmfmn"]
-size = Vector2(39, 43)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7lwy"]
+size = Vector2(20.90625, 14.875)
 
 [node name="interfaz3" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-1789.0]
@@ -4733,10 +4482,6 @@ position = Vector2(-1.9999962, 1)
 scale = Vector2(225.99998, 52.999996)
 texture = SubResource("PlaceholderTexture2D_6xsjs")
 
-[node name="nivel 3" parent="." groups=["jugador"] instance=ExtResource("1_6xsjs")]
-texture_filter = 1
-position = Vector2(227, -23)
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_7gqem")
 format = 2
@@ -4751,36 +4496,20 @@ script = SubResource("GDScript_lxc5e")
 position = Vector2(212, 88)
 shape = SubResource("RectangleShape2D_lxc5e")
 
-[node name="enemigo" type="CharacterBody2D" parent="."]
-script = SubResource("GDScript_dt8o0")
+[node name="enemigo2" parent="." instance=ExtResource("6_x7lwy")]
+position = Vector2(20, -78)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemigo" groups=["jugador"]]
-position = Vector2(18.5, -286)
-scale = Vector2(0.8125, 1.1250001)
-sprite_frames = SubResource("SpriteFrames_pb0qv")
-animation = &"Hit"
-frame_progress = 0.67816734
+[node name="player" parent="." instance=ExtResource("6_7gqem")]
+position = Vector2(206, 9)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigo"]
-position = Vector2(19, -274)
-shape = SubResource("CircleShape2D_2xtum")
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="enemigo"]
-target_position = Vector2(0, 20)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(458, 530)
+shape = SubResource("RectangleShape2D_x7lwy")
 
-[node name="CuerpoDañino" type="Area2D" parent="enemigo"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigo/CuerpoDañino"]
-position = Vector2(22.5, -274.5)
-shape = SubResource("RectangleShape2D_dt8o0")
-
-[node name="CabezaDetector" type="Area2D" parent="enemigo"]
-position = Vector2(54, -274)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigo/CabezaDetector"]
-position = Vector2(-34.5, -0.5)
-shape = SubResource("RectangleShape2D_tmfmn")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(132.54688, -41.5625)
+shape = SubResource("RectangleShape2D_x7lwy")
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="enemigo/CuerpoDañino" to="enemigo" method="_on_cuerpo_dañino_body_entered"]
-[connection signal="body_entered" from="enemigo/CabezaDetector" to="enemigo" method="_on_cabeza_detector_body_entered"]
