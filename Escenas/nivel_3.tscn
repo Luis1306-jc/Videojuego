@@ -104,24 +104,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		print(\"¡Auch! Reiniciando nivel...\")
 		get_tree().reload_current_scene()
-		# Añade esto al final de tu script de jugador
-func morir_gato():
-	# 1. Detenemos al gato para que no se mueva mientras muere
-	set_physics_process(false)
-	
-	# 2. Intentamos reproducir la animación
-	if $AnimatedSprite2D.sprite_frames.has_animation(\"Dead\"):
-		$AnimatedSprite2D.play(\"Dead\")
-		print(\"Gatito muriendo...\")
-	
-	# 3. ESPERA DE SEGURIDAD: 
-	# No importa si la animación tiene loop o no, 
-	# el juego se reiniciará sí o sí tras 1.5 segundos.
-	await get_tree().create_timer(1.5).timeout
-	
-	# 4. REINICIAR
-	print(\"Reiniciando nivel...\")
-	get_tree().reload_current_scene()
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gj77e"]
@@ -255,7 +237,7 @@ animations = [{
 
 [node name="nivel 3" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["jugador"]]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = SubResource("GDScript_clw8a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -268,5 +250,5 @@ scale = Vector2(1.2812501, 1.3750001)
 sprite_frames = SubResource("SpriteFrames_pnrke")
 animation = &"Dead"
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(14, -59)
