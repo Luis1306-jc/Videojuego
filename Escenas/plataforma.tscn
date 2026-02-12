@@ -9,22 +9,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4sdn"]
-size = Vector2(41.017204, 16.999992)
-
-[sub_resource type="Animation" id="Animation_7x6ct"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
+size = Vector2(38.01268, 11.0429535)
 
 [sub_resource type="Animation" id="Animation_cteqh"]
 resource_name = "move"
@@ -43,6 +28,21 @@ tracks/0/keys = {
 "values": [0.0, 0.8784]
 }
 
+[sub_resource type="Animation" id="Animation_7x6ct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fukgq"]
 _data = {
 &"RESET": SubResource("Animation_7x6ct"),
@@ -59,12 +59,12 @@ position = Vector2(356, 209)
 position = Vector2(231, 211)
 
 [node name="Sprite2D" type="Sprite2D" parent="PathFollow2D/CharacterBody2D"]
-position = Vector2(-228.08685, -207.18889)
-scale = Vector2(0.32948175, 0.15920143)
+position = Vector2(-230.00026, -210.97778)
+scale = Vector2(0.29958487, 0.1)
 texture = ExtResource("1_hgmvb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D"]
-position = Vector2(-229, -207)
+position = Vector2(-230.01086, -210.47852)
 shape = SubResource("RectangleShape2D_i4sdn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
