@@ -318,7 +318,7 @@ tile_map_data = PackedByteArray("AAAAACYAAgAHAAIAAAABACYAAgAHAAIAAAACACYAAgAHAAI
 tile_set = SubResource("TileSet_ijxpu")
 
 [node name="player" parent="." groups=["barraplayer2"] instance=ExtResource("6_aaebe")]
-position = Vector2(57, 626)
+position = Vector2(190, 599)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("14_i4sdn")

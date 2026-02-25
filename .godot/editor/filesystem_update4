@@ -1,4 +1,2 @@
-res://Escenas/llave.tscn
-res://Escenas/puerta.tscn
+res://Escenas/interfaz_3.tscn
 res://Escenas/game.tscn
-res://Scripts/player.gd
