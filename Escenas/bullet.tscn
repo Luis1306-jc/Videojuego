@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c16hk8mt6k2qn"]
+
+[ext_resource type="Script" uid="uid://daq70ajo3wfag" path="res://Scripts/bullet.gd" id="1_tn52c"]
+[ext_resource type="Texture2D" uid="uid://cgajqnec2ora2" path="res://platformer/4 Enemies/4/Cannonball1.png" id="2_e7s4r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hlqq3"]
+radius = 3.0
+
+[node name="bullet" type="Area2D"]
+script = ExtResource("1_tn52c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 4.7683716e-07)
+scale = Vector2(0.59999996, 0.55)
+texture = ExtResource("2_e7s4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hlqq3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

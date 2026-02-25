@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c47a8my3khwy8"]
+
+[ext_resource type="Script" uid="uid://cdy0w4bciy842" path="res://Scripts/powerup_vida.gd" id="1_fuarj"]
+[ext_resource type="Texture2D" uid="uid://d2rov4mci7tcs" path="res://tilemap/Tiles/tile_0044.png" id="2_wsj5h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8pl5v"]
+radius = 7.0
+
+[node name="powerup vida" type="Area2D"]
+script = ExtResource("1_fuarj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, 4)
+texture = ExtResource("2_wsj5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 3)
+shape = SubResource("CircleShape2D_8pl5v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
