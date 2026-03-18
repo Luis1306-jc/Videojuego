@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1773615413
+::res://::1773871499
 icon.svg::CompressedTexture2D::8795381613585821063::1768868301::1768868424::1::::<><><>0<>0<>fba7c017b269017f66e8ea5f91052c0c<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1773206434::0::1::::<><><>0<>0<><>::
 ::res://background/::1770322485
@@ -196,13 +196,13 @@ Cat_run_1.png::CompressedTexture2D::5087675701732581486::1768868298::1768868427:
 Cat_spining_1.png::CompressedTexture2D::1479908222386163460::1768868298::1768868427::1::::<><><>0<>0<>cbe88e4c3e512943aea4c60db7f1d76c<>res://.godot/imported/Cat_spining_1.png-db11e95eed574e827265913319161253.ctex::
 Cat_walk_1.png::CompressedTexture2D::8762805527563880862::1768868298::1768868427::1::::<><><>0<>0<>96d646d1648a0c3d8f22636aa308b9d6<>res://.godot/imported/Cat_walk_1.png-7a8f17dd24b211f1b2d1d1a9beb4b05a.ctex::
 Cat_win_cheer_1.png::CompressedTexture2D::3208423357058659659::1768868298::1768868427::1::::<><><>0<>0<>567919902908447017a1345fd2864906<>res://.godot/imported/Cat_win_cheer_1.png-bfde9e6ef9753db1465a6d55086155ca.ctex::
-::res://Escenas/::1773338230
+::res://Escenas/::1773636881
 bullet.tscn::PackedScene::6662191641952643385::1769018123::0::1::::<><><>0<>0<><>::uid://daq70ajo3wfag::::res://Scripts/bullet.gd<>uid://cgajqnec2ora2::::res://platformer/4 Enemies/4/Cannonball1.png
 cañon.tscn::PackedScene::3958045731491679613::1769018123::0::1::::<><><>0<>0<><>::uid://b4jtklxnegooo::::res://Scripts/cañon.gd<>uid://c16hk8mt6k2qn::::res://Escenas/bullet.tscn<>uid://ck6wslpapt5fk::::res://platformer/4 Enemies/4/Idle.png
 enemie.tscn::PackedScene::5168090511980968289::1772033337::0::1::::<><><>0<>0<><>::uid://lp1hqxhfwceb::::res://Scripts/enemie.gd<>uid://c37p0ort2pkjm::::res://Imagenes/animals/PNG/With_Shadow/Fox/Fox_Death_with_shadow.png<>uid://cpggjlmbo84fb::::res://Imagenes/animals/PNG/With_Shadow/Fox/Fox_Idle_with_shadow.png<>uid://c10xu82hkv113::::res://Imagenes/animals/PNG/With_Shadow/Fox/Fox_Run_with_shadow.png
 enemigo.tscn::PackedScene::418006439065456214::1770322284::0::1::::<><><>0<>0<><>::uid://d1y0eiuh1bj2e::::res://Scripts/enemigo.gd<>uid://102slp38d0u2::::res://platformer/4 Enemies/2/Run.png
 enemigo_2.tscn::PackedScene::2339218210738436897::1770322284::0::1::::<><><>0<>0<><>::uid://bpcgel6u88ecn::::res://platformer/4 Enemies/3/Walk.png<>uid://b6a8damclsv7t::::res://Scripts/enemigo_2.gd
-game.tscn::PackedScene::6863091710950060910::1773206434::0::1::::<><><>0<>0<><>::uid://cyerk6hjr2pdc::::res://tilemap/Tilemap/tilemap_packed.png<>uid://cnc6ql4hveu65::::res://tilemap/Tilemap/tilemap-backgrounds_packed.png<>uid://cpibanlehd67j::::res://Escenas/player.tscn<>uid://f7qrf0y3afjq::::res://Escenas/enemigo.tscn<>uid://bhkkkoqreyllo::::res://Escenas/moneda.tscn<>uid://5w5meaqaw1v::::res://Escenas/pincho.tscn<>uid://bhob7tg11u3sr::::res://Escenas/llave.tscn<>uid://bwnko11dgkri0::::res://Escenas/cañon.tscn<>uid://dyuncuo7r7w55::::res://Escenas/puerta.tscn<>uid://yxwf4akm5t4x::::res://Scripts/hud.gd<>uid://c47a8my3khwy8::::res://Escenas/powerup_vida.tscn
+game.tscn::PackedScene::6863091710950060910::1773618412::0::1::::<><><>0<>0<><>::uid://cyerk6hjr2pdc::::res://tilemap/Tilemap/tilemap_packed.png<>uid://cnc6ql4hveu65::::res://tilemap/Tilemap/tilemap-backgrounds_packed.png<>uid://cpibanlehd67j::::res://Escenas/player.tscn<>uid://f7qrf0y3afjq::::res://Escenas/enemigo.tscn<>uid://bhkkkoqreyllo::::res://Escenas/moneda.tscn<>uid://5w5meaqaw1v::::res://Escenas/pincho.tscn<>uid://bhob7tg11u3sr::::res://Escenas/llave.tscn<>uid://bwnko11dgkri0::::res://Escenas/cañon.tscn<>uid://dyuncuo7r7w55::::res://Escenas/puerta.tscn<>uid://yxwf4akm5t4x::::res://Scripts/hud.gd<>uid://c47a8my3khwy8::::res://Escenas/powerup_vida.tscn
 game_over.tscn::PackedScene::908855405240315928::1773206434::0::1::::<><><>0<>0<><>::uid://bfnveeq482u3t::::res://Scripts/game_over.gd<>uid://dd8h75gdtllr4::::res://font/04B_30__.TTF<>uid://vvueiwqmpl7h::::res://background/Backgrounds/backgroundColorFall.png
 interfaz_3.tscn::PackedScene::4331653862688707632::1773254175::0::1::::<><><>0<>0<><>::uid://c8bmd25nu7lsx::::res://platformer/7 Levels/Tiled/GUI.png<>uid://ci7l7t1dm8xw8::::res://tilemap/SampleA.png<>uid://dysxlvk6jnseu::::res://platformer/7 Levels/Tiled/Tileset.png<>uid://bowtcpvgdb2bg::::res://tilemap/Preview.png<>uid://5w5meaqaw1v::::res://Escenas/pincho.tscn<>uid://cpibanlehd67j::::res://Escenas/player.tscn<>uid://8let18qpud3n::::res://Escenas/enemigo_2.tscn<>uid://bwnko11dgkri0::::res://Escenas/cañon.tscn<>uid://f7qrf0y3afjq::::res://Escenas/enemigo.tscn<>uid://c47a8my3khwy8::::res://Escenas/powerup_vida.tscn<>uid://bhkkkoqreyllo::::res://Escenas/moneda.tscn<>uid://bhob7tg11u3sr::::res://Escenas/llave.tscn<>uid://dyuncuo7r7w55::::res://Escenas/puerta.tscn
 llave.tscn::PackedScene::2906762748543251813::1773206434::0::1::::<><><>0<>0<><>::uid://jvlbn3pbe400::::res://Scripts/llave.gd<>uid://cikm3kkpvpo1f::::res://items/Free Icon Pack v3.1 (Basic)/Item/Key/64px/Golden Key 1st 64px.png
@@ -210,7 +210,7 @@ mapas.tscn::PackedScene::6863091710950060910::1773338230::0::1::::<><><>0<>0<><>
 Menu_Principal.tscn::PackedScene::7218942755023223423::1770322284::0::1::::<><><>0<>0<><>::uid://dnxgerpu76pym::::res://interfaz inicio/Backgrounds/backgroundColorFall.png<>uid://b3clj5kfwp72t::::res://Scripts/menu_principal.gd<>uid://bc7rut2hmrlwq::::res://font/Mario-Kart-DS.ttf<>uid://dd8h75gdtllr4::::res://font/04B_30__.TTF
 moneda.tscn::PackedScene::2899012155389115728::1770322284::0::1::::<><><>0<>0<><>::uid://03t1y4n3s51i::::res://Scripts/moneda.gd<>uid://irm7ut8rmlp7::::res://platformer/3 Objects/Gems/2.png
 Movement.gd::GDScript::4520192084353856084::1768868298::0::1::::<>CharacterBody2D<><>0<>0<><>::
-nivel_2.tscn::PackedScene::5315841987630655704::1770322284::0::1::::<><><>0<>0<><>::
+nivel_2.tscn::PackedScene::5315841987630655704::1773636881::0::1::::<><><>0<>0<><>::uid://t6bvure4tmf4::::res://tilemap/tilemap-backgrounds.png<>uid://7llxjlivkrjj::::res://tilemap/Tilemap/tilemap.png<>uid://cpibanlehd67j::::res://Escenas/player.tscn<>uid://5w5meaqaw1v::::res://Escenas/pincho.tscn<>uid://c47a8my3khwy8::::res://Escenas/powerup_vida.tscn<>uid://bwnko11dgkri0::::res://Escenas/cañon.tscn<>uid://bhkkkoqreyllo::::res://Escenas/moneda.tscn<>uid://f7qrf0y3afjq::::res://Escenas/enemigo.tscn<>uid://8let18qpud3n::::res://Escenas/enemigo_2.tscn<>uid://bhob7tg11u3sr::::res://Escenas/llave.tscn<>uid://dyuncuo7r7w55::::res://Escenas/puerta.tscn
 nivel_3.tscn::PackedScene::4764445584150772238::1773206434::0::1::::<><><>0<>0<><>::uid://2q0gbmj4cx2x::::res://Cat_sheets/Cat_fall_1.png<>uid://bp5c6ljv0wjtk::::res://Cat_sheets/Cat_dead_1.png<>uid://ckuc06vojxwi0::::res://Cat_sheets/Cat_idle_1.png<>uid://d3vjfcq8gjhdt::::res://Cat_sheets/Cat_jump_2.png<>uid://ceqrjmp2va2xe::::res://Cat_sheets/Cat_run_1.png
 pincho.tscn::PackedScene::63321316760629473::1770322284::0::1::::<><><>0<>0<><>::uid://b52s1i6b6i8l2::::res://Scripts/pincho.gd<>uid://d20kgtm1q26d1::::res://platformer/6 Traps/4.png
 plataforma.tscn::PackedScene::8287176385739828725::1773206434::0::1::::<><><>0<>0<><>::uid://dxkswdtw04idj::::res://icon.svg
@@ -3817,7 +3817,7 @@ Tileset.png::CompressedTexture2D::8882370352391193148::1769018126::1770322479::1
 5.png::CompressedTexture2D::7266414563222992211::1769018126::1770322479::1::::<><><>0<>0<>a24bbb8540447bcb16fbf1b6a4151675<>res://.godot/imported/5.png-b50a2d0e4b0d82b367fbd6dd9bde44e0.ctex::
 6.png::CompressedTexture2D::2596047364893412518::1769018126::1770322479::1::::<><><>0<>0<>a5703b64983bf4e91f9921716cbe2047<>res://.godot/imported/6.png-96c73166de513e063e0d4a3fdde0923b.ctex::
 ::res://platformer/PSD/::1769054755
-::res://Scripts/::1773254175
+::res://Scripts/::1773633380
 barravida.gd::GDScript::6769540653467750726::1768926081::0::1::::<>ProgressBar<><>0<>0<><>::
 barravidaperso.gd::GDScript::1510142172401791414::1770322284::0::1::::<>TextureProgressBar<><>0<>0<><>::
 bullet.gd::GDScript::7194279698338032394::1769018123::0::1::::<>Area2D<><>0<>0<><>::
@@ -3834,7 +3834,7 @@ moneda.gd::GDScript::1813725027557125924::1770322284::0::1::::<>Area2D<><>0<>0<>
 pincho.gd::GDScript::4548963996867963045::1770322284::0::1::::<>Area2D<><>0<>0<><>::
 player.gd::GDScript::8288733817111357979::1773206434::0::1::::<>CharacterBody2D<><>0<>0<><>::
 powerup_vida.gd::GDScript::5034511701507305785::1770322284::0::1::::<>Area2D<><>0<>0<><>::
-puerta.gd::GDScript::7209797468215672380::1773254175::0::1::::<>Area2D<><>0<>0<><>::
+puerta.gd::GDScript::7209797468215672380::1773633380::0::1::::<>Area2D<><>0<>0<><>::
 ::res://tilemap/::1773338746
 License.txt::TextFile::-1::1768868301::0::1::::<><><>0<>0<><>::
 Preview.png::CompressedTexture2D::3415638820233079116::1768868301::1768868425::1::::<><><>0<>0<>ccb7fbef2b1a05340d7b1ad98df23fec<>res://.godot/imported/Preview.png-17f863c1f6e7e7cae5e5790e8068f3e2.ctex::
