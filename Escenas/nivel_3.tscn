@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b846ytoc7vpg5"]
+[gd_scene format=3 uid="uid://b846ytoc7vpg5"]
 
 [ext_resource type="Texture2D" uid="uid://2q0gbmj4cx2x" path="res://Cat_sheets/Cat_fall_1.png" id="1_clw8a"]
 [ext_resource type="Texture2D" uid="uid://bp5c6ljv0wjtk" path="res://Cat_sheets/Cat_dead_1.png" id="1_l2spy"]
@@ -235,20 +235,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="nivel 3" type="Node2D"]
+[node name="nivel 3" type="Node2D" unique_id=1049254531]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1527893351]
 script = SubResource("GDScript_clw8a")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1491459002]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_gj77e")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=453748697]
 position = Vector2(1, -1.0000002)
 scale = Vector2(1.2812501, 1.3750001)
 sprite_frames = SubResource("SpriteFrames_pnrke")
 animation = &"Dead"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2112773455]
 position = Vector2(14, -59)
