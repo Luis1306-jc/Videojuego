@@ -4,14 +4,38 @@ var velocidad := 170
 var salto := 250
 var gravedad := 600
 var atacar := false	
-var hitplayer=false
+var hitplayer = false
 var cont_jump : int = 0
 var max_jump : int = 2
+var is_dead = false
+
 @onready var vida_bar := $BarravidaPlayer
 
 func _ready():
 	$Area2D/CollisionShape2D.disabled = true
 	$anim.animation_finished.connect(_on_anim_finished)
+
+	# 🔥 CONFIGURACIÓN AUTOMÁTICA DE CÁMARA
+	var tilemap = get_tree().get_current_scene().get_node("TileMapLayer")
+	
+	var rect = tilemap.get_used_rect()
+	var tile_size = tilemap.tile_set.tile_size
+
+	var width = rect.size.x * tile_size.x
+	var height = rect.size.y * tile_size.y
+
+	$Camera2D.limit_left = -300
+	$Camera2D.limit_top = -99999
+	$Camera2D.limit_right = width + 500
+	$Camera2D.limit_bottom = height
+	
+	$Camera2D.force_update_scroll()
+
+	# Config básica recomendada
+	$Camera2D.zoom = Vector2(1, 1)
+	$Camera2D.position = Vector2(0, 0)
+	$Camera2D.enabled = true
+
 
 func _physics_process(delta):
 	velocity.y += gravedad * delta
@@ -31,14 +55,14 @@ func _physics_process(delta):
 
 			if is_on_floor() and Input.is_action_just_pressed("saltar"):
 				cont_jump = 0
-				cont_jump+=1
+				cont_jump += 1
 				velocity.y = -salto
 			else:
 				if Input.is_action_just_pressed("saltar") and max_jump > cont_jump:
-					cont_jump+=1
+					cont_jump += 1
 					velocity.y = -salto
 				if Input.is_action_just_released("saltar"):
-					velocity.y += 5000*delta
+					velocity.y += 5000 * delta
 
 			if Input.is_action_just_pressed("atacar") and !hitplayer:
 				atacar = true
@@ -46,6 +70,7 @@ func _physics_process(delta):
 				$anim.play("atack")
 
 		animaciones()
+
 	move_and_slide()
 
 
@@ -63,15 +88,16 @@ func animaciones():
 			$anim.play("jump")
 		else:
 			$anim.play("fall")
-			
+
+
 func hit():
 	hitplayer = true
 	velocity = Vector2.ZERO
 	
 	if !$anim.flip_h:
-		velocity = Vector2(-100,-200)
+		velocity = Vector2(-100, -200)
 	else:
-		velocity = Vector2(100,-200)
+		velocity = Vector2(100, -200)
 	
 	$anim.play("hit")
 	await $anim.animation_finished
@@ -81,7 +107,6 @@ func hit():
 	if vida_bar.disminuir_vida(30):
 		dead()
 
-var is_dead = false
 
 func dead():
 	if is_dead:
@@ -94,7 +119,6 @@ func dead():
 	
 	$anim.play("dead")
 	
-	# Espera fija (más seguro que animation_finished)
 	await get_tree().create_timer(1.0).timeout
 	
 	Global.moneda = 0
@@ -110,4 +134,4 @@ func _on_anim_finished():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("enemie"):
-		hit()  # Llama a tu propio método hit() del jugador
+		hit()
