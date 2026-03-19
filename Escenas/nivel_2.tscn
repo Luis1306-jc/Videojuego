@@ -699,7 +699,7 @@ position = Vector2(562, 2)
 position = Vector2(172, -218)
 
 [node name="moneda9" parent="." unique_id=1804901734 instance=ExtResource("7_djyks")]
-position = Vector2(342, 21)
+position = Vector2(340, 22)
 
 [node name="moneda3" parent="." unique_id=2096154938 instance=ExtResource("7_djyks")]
 position = Vector2(617, 277)
