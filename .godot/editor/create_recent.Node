@@ -1,3 +1,4 @@
+TileMap
 TileMapLayer
 ParallaxBackground
 StaticBody2D
@@ -11,5 +12,3 @@ ColorRect
 CanvasLayer
 Sprite2D
 Area2D
-AnimatedSprite2D
-CharacterBody2D
