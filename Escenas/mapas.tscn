@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://c41seae2c8e7w"]
+[gd_scene load_steps=21 format=4 uid="uid://bcav46eofdqdy"]
 
 [ext_resource type="Texture2D" uid="uid://cyerk6hjr2pdc" path="res://tilemap/Tilemap/tilemap_packed.png" id="1_obr3f"]
 [ext_resource type="Texture2D" uid="uid://cnc6ql4hveu65" path="res://tilemap/Tilemap/tilemap-backgrounds_packed.png" id="2_3418m"]
