@@ -1,6 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1773953453
-export_presets.cfg::TextFile::-1::1773953453::0::1::::<><><>0<>0<><>::
+::res://::1773956536
+export_presets.cfg::TextFile::-1::1773953994::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::8795381613585821063::1773952838::1773953050::1::::<><><>0<>0<>fba7c017b269017f66e8ea5f91052c0c<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1773952838::0::1::::<><><>0<>0<><>::
 ::res://background/::1773953069
@@ -29,7 +29,7 @@ mountainA.png::CompressedTexture2D::7843027383309478895::1773952838::1773953070:
 mountainB.png::CompressedTexture2D::6318721310971851264::1773952838::1773953070::1::::<><><>0<>0<>14e9f27d6c3ad4c233caf67cce164c78<>res://.godot/imported/mountainB.png-de7b72901726897e46fe51b3472ba1f0.ctex::
 mountainC.png::CompressedTexture2D::1241438508424507805::1773952838::1773953070::1::::<><><>0<>0<>4c1a0d6facafbb21d9ca3eee23a85ea7<>res://.godot/imported/mountainC.png-3275fe8d7f47444feb0024353efac3a7.ctex::
 mountains.png::CompressedTexture2D::5841593315415076704::1773952838::1773953070::1::::<><><>0<>0<>a3cf6032031d4ffa9daf90f0ed65f078<>res://.godot/imported/mountains.png-ae803f19c17f72cb8934fa6dd1c7fc3e.ctex::
-::res://background/PNG/::1773953835
+::res://background/PNG/::1773953838
 logo.png::CompressedTexture2D::497398096411059468::1773953768::1773953838::0::::<><><>0<>0<>c14fc3b738b29a7de0117d5d19bafb46<>::
 ::res://background/PNG/Default/::1773953071
 bush1.png::CompressedTexture2D::6123323728051860798::1773952838::1773953070::1::::<><><>0<>0<>acb7033e691373b77674e455bc223f6d<>res://.godot/imported/bush1.png-851e32dec797164540a5a13670cba5af.ctex::
@@ -220,6 +220,7 @@ plataforma.tscn::PackedScene::8287176385739828725::1773952836::0::1::::<><><>0<>
 player.tscn::PackedScene::5842250460969583885::1773952836::0::1::::<><><>0<>0<><>::uid://dqdeh8vhcucul::::res://Scripts/player.gd<>uid://d2jcguy02q4t::::res://Cat_sheets/Cat_attack_1.png<>uid://bp5c6ljv0wjtk::::res://Cat_sheets/Cat_dead_1.png<>uid://2q0gbmj4cx2x::::res://Cat_sheets/Cat_fall_1.png<>uid://dvj25dgfnmr8j::::res://Cat_sheets/Cat_hit_1.png<>uid://ckuc06vojxwi0::::res://Cat_sheets/Cat_idle_1.png<>uid://d3vjfcq8gjhdt::::res://Cat_sheets/Cat_jump_2.png<>uid://ceqrjmp2va2xe::::res://Cat_sheets/Cat_run_1.png<>uid://x1l4vldf0vir::::res://tilemap/Tiles/tile_0046.png<>uid://d2rov4mci7tcs::::res://tilemap/Tiles/tile_0044.png<>uid://vrr26aoi0ieg::::res://Scripts/barravidaperso.gd
 powerup_vida.tscn::PackedScene::6874437520859280001::1773952836::0::1::::<><><>0<>0<><>::uid://cdy0w4bciy842::::res://Scripts/powerup_vida.gd<>uid://d2rov4mci7tcs::::res://tilemap/Tiles/tile_0044.png
 puerta.tscn::PackedScene::8885875819539249922::1773952836::0::1::::<><><>0<>0<><>::uid://dayqktpcg02qi::::res://Scripts/puerta.gd<>uid://dqd80q46awoyf::::res://items/puerta.png
+::res://exeAventuras/::1773954057
 ::res://font/::1773953033
 04B_30__.TTF::FontFile::7438436797363167987::1773952838::1773952838::1::::<><><>0<>0<>0448cdbfd1ad343b0c1b3e4a84693123<>res://.godot/imported/04B_30__.TTF-bfeb4382ac70c0c59fd743adc57c729d.fontdata::
 Daydream DEMO.otf::FontFile::1886720928010308766::1773952838::1773953033::1::::<><><>0<>0<>2ac8519095b8ca2e4b05820039061b05<>res://.godot/imported/Daydream DEMO.otf-0854bc584d383a4cc1ae16fa3da7177c.fontdata::
