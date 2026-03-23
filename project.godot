@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Interfaz"
+config/name="Interfaz (4.6) (4.6)"
 run/main_scene="uid://da356x68id3tr"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"

@@ -1,0 +1,14 @@
+Sprite2D
+ParallaxLayer
+ParallaxBackground
+TileMap
+TileMapLayer
+StaticBody2D
+CollisionShape2D
+VBoxContainer
+Panel
+TextureRect
+Button
+Label
+ColorRect
+CanvasLayer
